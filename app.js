@@ -1,9 +1,12 @@
-/* =========================================================
-   Alina Flux – Premium App Logic v2
-   Clean • Fast • Clickable Cards • Auto Focus
-   ========================================================= */
+// Auto focus search on load
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("searchInput");
+  if (searchInput) {
+    searchInput.focus();
+  }
+});
 
-// Load products
+// Fetch products
 fetch("products.json")
   .then(res => res.json())
   .then(data => initApp(data))
@@ -17,59 +20,38 @@ function initApp(products) {
   const latestTool = products[0];
   const latestContainer = document.getElementById("latest-tool");
   const latestButton = document.getElementById("latest-button");
-  const searchInput = document.getElementById("searchInput");
 
-  /* =========================
-     Latest Tool Section
-  ========================== */
-
+  // Latest tool
   latestContainer.innerHTML = `
-    <strong>Post #${latestTool.code}</strong> – ${latestTool.name}
+    <span class="code-badge">CODE</span>
+    <strong>#${latestTool.code}</strong> — ${latestTool.name}
   `;
-
   latestButton.href = latestTool.link;
 
-  /* =========================
-     Render Default (Top 20)
-  ========================== */
-
+  // Show first 20
   renderTools(products.slice(0, 20));
 
-  /* =========================
-     Auto Focus Search
-  ========================== */
-
-  window.addEventListener("load", () => {
-    searchInput.focus();
-  });
-
-  /* =========================
-     Search Logic
-  ========================== */
+  // Search
+  const searchInput = document.getElementById("searchInput");
 
   searchInput.addEventListener("input", function () {
     const query = this.value.toLowerCase().trim();
 
-    if (query === "") {
+    if (!query) {
       renderTools(products.slice(0, 20));
       return;
     }
 
-    const filtered = products.filter(product =>
-      String(product.code).includes(query) ||
-      product.name.toLowerCase().includes(query)
+    const filtered = products.filter(p =>
+      p.code.includes(query) ||
+      p.name.toLowerCase().includes(query)
     );
 
     renderTools(filtered);
   });
 }
 
-
-/* =========================================================
-   Render Tool Cards
-   Entire Card Clickable
-   ========================================================= */
-
+// Render tools
 function renderTools(tools) {
 
   const container = document.getElementById("tools-container");
@@ -86,28 +68,26 @@ function renderTools(tools) {
 
   tools.forEach(tool => {
 
-    // Create clickable card wrapper (anchor)
     const card = document.createElement("a");
+    card.className = "tool-card";
     card.href = tool.link;
     card.target = "_blank";
-    card.className = "tool-card";
-    card.style.textDecoration = "none";
-    card.style.color = "inherit";
+    card.rel = "noopener";
 
     card.innerHTML = `
-      <div class="tool-header">
-        <span class="code">Post #${tool.code}</span>
+      <div class="tool-top">
+        <div class="code-group">
+          <span class="code-label">CODE</span>
+          <span class="code-number">#${tool.code}</span>
+        </div>
         <span class="tag">${tool.tag}</span>
       </div>
 
       <h3>${tool.name}</h3>
+      <p class="description">${tool.description}</p>
 
-      <p class="description">
-        ${tool.description}
-      </p>
-
-      <div class="button-row">
-        <span class="btn">Open</span>
+      <div class="card-footer">
+        <span class="open-text">Open →</span>
       </div>
     `;
 
