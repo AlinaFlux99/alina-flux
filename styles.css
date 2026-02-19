@@ -1,8 +1,8 @@
 /* =========================================================
-   Alina Flux – Ultra Style Pink Premium v2.3 (Enhanced Featured Card)
+   Alina Flux – Ultra Style Pink Premium v2.4 (Clean SaaS Featured)
    Drop-in replacement for styles.css
    (keeps your existing class names + your clickable-card patch)
-   + Stronger Featured Latest card
+   + Featured Latest card (clean premium colors)
    + Better visual hierarchy
    + Arrow buttons (Open →)
    + Fix for "No tool found" (hidden utility)
@@ -50,6 +50,7 @@ body {
   color: var(--text);
   line-height: 1.6;
 
+  /* Keep your premium background (unchanged) */
   background:
     radial-gradient(900px 420px at 50% -120px, rgba(255, 62, 165, 0.12), transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, var(--bg-soft) 100%);
@@ -88,7 +89,9 @@ body {
 }
 
 /* =========================================================
-   Premium Featured Latest Tool Card (UPGRADED)
+   Premium Featured Latest Tool Card (CLEAN COLORS)
+   - No pink fill background (looks more premium)
+   - Pink only for badge + button (better contrast)
    ========================================================= */
 
 .latest-section .card {
@@ -102,23 +105,25 @@ body {
 
   border-radius: 26px;
 
-  background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
-  border: 1px solid rgba(255, 62, 165, 0.22);
+  /* CLEAN WHITE SURFACE (fix ugly colors) */
+  background: #ffffff;
 
+  /* crisp featured ring */
+  border: 1.5px solid rgba(255, 62, 165, 0.22);
+
+  /* premium shadow (less pink, more SaaS) */
   box-shadow:
-    0 32px 85px rgba(255, 62, 165, 0.16),
-    0 12px 30px rgba(21, 24, 33, 0.06);
+    0 22px 60px rgba(21, 24, 33, 0.10),
+    0 8px 20px rgba(21, 24, 33, 0.05);
+
+  transition: transform 0.18s ease,
+              box-shadow 0.18s ease,
+              border-color 0.18s ease;
 }
 
-/* glow aura */
+/* remove pink glow aura (this was causing ugly look) */
 .latest-section .card::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background:
-    radial-gradient(700px 240px at 50% 0%, rgba(255, 62, 165, 0.25), transparent 65%);
-  pointer-events: none;
-  opacity: 0.9;
+  display: none;
 }
 
 .latest-section .card > * {
@@ -134,25 +139,30 @@ body {
   margin-bottom: 8px;
 }
 
-/* Featured badge */
+/* Featured badge (clean + modern, not flashy) */
 .latest-section .card h2::after {
   content: "FEATURED";
   margin-left: 10px;
-  padding: 5px 10px;
-  font-size: 11px;
+  padding: 4px 9px;
+
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.08em;
+
   border-radius: 999px;
-  color: #fff;
-  background: linear-gradient(135deg, var(--pink), var(--pink-2));
-  box-shadow: 0 10px 22px rgba(255, 62, 165, 0.25);
+
+  background: rgba(255, 62, 165, 0.10);
+  color: var(--pink);
+  border: 1px solid rgba(255, 62, 165, 0.25);
+
+  box-shadow: none;
 }
 
-/* Latest tool text */
+/* Latest tool text (cleaner) */
 #latest-tool {
   font-size: 14px;
-  font-weight: 700;
-  color: rgba(21, 24, 33, 0.70);
+  font-weight: 600;
+  color: rgba(21, 24, 33, 0.62);
   margin-bottom: 14px;
 }
 
@@ -162,7 +172,7 @@ body {
   color: var(--text);
 }
 
-/* Button inside Latest */
+/* Button inside Latest (kept strong CTA) */
 .latest-section .btn {
   margin-top: 6px;
   padding: 13px 26px;
@@ -171,13 +181,13 @@ body {
   box-shadow: 0 16px 36px rgba(255, 62, 165, 0.28);
 }
 
-/* Hover elevate */
+/* Hover elevate (premium) */
 .latest-section .card:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 62, 165, 0.36);
+  border-color: rgba(255, 62, 165, 0.40);
   box-shadow:
-    0 40px 100px rgba(255, 62, 165, 0.20),
-    0 16px 40px rgba(21, 24, 33, 0.08);
+    0 30px 80px rgba(21, 24, 33, 0.14),
+    0 12px 26px rgba(255, 62, 165, 0.12);
 }
 
 /* =========================================================
