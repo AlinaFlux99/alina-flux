@@ -164,11 +164,24 @@ body {
 
 /* Latest tool text (cleaner) */
 #latest-tool {
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(21, 24, 33, 0.62);
+  font-size: 15px;          /* slightly bigger */
+  font-weight: 500;
+  color: rgba(21, 24, 33, 0.65);
   margin-bottom: 14px;
 }
+
+/* Make tool name stronger */
+.latest-name {
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* Make code slightly softer */
+.latest-code {
+  font-weight: 600;
+  color: rgba(21, 24, 33, 0.55);
+}
+
 
 /* Strong emphasis if JS wraps tool name in <strong> */
 #latest-tool strong {
