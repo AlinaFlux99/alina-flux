@@ -1,5 +1,9 @@
 /* =========================================================
-   Alina Flux – Soft Premium Feminine (Ultra-style Light)
+   Alina Flux – Pink Premium (Instagram-first, Tier-1 clean)
+   Goals:
+   - Soft pink brand accent (clickable)
+   - Codes very clear & consistent
+   - More premium spacing + hierarchy
    ========================================================= */
 
 /* Reset */
@@ -12,38 +16,54 @@
 }
 
 :root {
-  --bg: #fdfdff;
+  /* Backgrounds */
+  --bg: #fff7fb;              /* very light pink */
   --surface: #ffffff;
-  --text: #2d2d36;
-  --muted: #7a8191;
 
-  --border: rgba(120, 120, 140, 0.12);
-  --shadow-soft: 0 6px 18px rgba(120, 120, 140, 0.08);
+  /* Text */
+  --text: #1f2330;
+  --muted: #6b7280;
 
-  /* Soft feminine lavender accent */
-  --accent: #8b7cf6;
-  --accent-soft: rgba(139, 124, 246, 0.12);
+  /* Borders / shadows */
+  --border: rgba(31, 35, 48, 0.10);
+  --shadow-soft: 0 10px 28px rgba(31, 35, 48, 0.08);
+  --shadow-hover: 0 14px 38px rgba(31, 35, 48, 0.12);
 
+  /* Pink brand */
+  --pink: #ff3ea5;
+  --pink-2: #ff6bc2;
+  --pink-soft: rgba(255, 62, 165, 0.12);
+
+  /* Radius */
   --radius: 18px;
+  --radius-lg: 22px;
+}
+
+html, body {
+  height: 100%;
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(900px 360px at 50% -80px, rgba(255, 62, 165, 0.14), transparent 60%),
+    var(--bg);
   color: var(--text);
-  padding: 24px 18px;
+  padding: 22px 16px 28px;
   line-height: 1.6;
 }
 
-/* Header */
+/* ---------------------------------------------------------
+   Header
+--------------------------------------------------------- */
 .header {
   text-align: center;
-  margin-bottom: 22px;
+  margin: 10px 0 16px;
 }
 
 .logo {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
+  font-size: 34px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
 }
 
 .subtitle {
@@ -52,154 +72,225 @@ body {
   margin-top: 6px;
 }
 
-/* Generic Card */
+/* ---------------------------------------------------------
+   Sections / cards
+--------------------------------------------------------- */
 .card {
   background: var(--surface);
-  padding: 20px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255, 62, 165, 0.10);
   box-shadow: var(--shadow-soft);
-  margin-bottom: 18px;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 14px;
 }
 
-/* Buttons */
+/* Latest tool */
+.latest-section .card h2 {
+  font-size: 16px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+#latest-tool {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------------------------------------------------------
+   Buttons (pink, comfy, clickable)
+--------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   padding: 12px 18px;
   border-radius: 14px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 900;
   text-decoration: none;
-
-  border: none;
+  border: 0;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+  user-select: none;
 }
 
-/* Soft gradient button */
+.btn:active {
+  transform: translateY(1px);
+}
+
 .primary {
-  background: linear-gradient(135deg, #8b7cf6, #b19cff);
   color: #ffffff;
-  box-shadow: 0 6px 18px rgba(139, 124, 246, 0.25);
+  background: linear-gradient(135deg, var(--pink), var(--pink-2));
+  box-shadow: 0 12px 26px rgba(255, 62, 165, 0.22);
 }
 
 .primary:hover {
   transform: translateY(-1px);
-  opacity: 0.95;
+  box-shadow: 0 16px 34px rgba(255, 62, 165, 0.28);
+  opacity: 0.98;
 }
 
-/* Search */
+/* ---------------------------------------------------------
+   Search
+--------------------------------------------------------- */
 .search-section {
-  margin: 16px 0 18px;
+  margin: 14px 0 14px;
 }
 
 #searchInput {
   width: 100%;
   padding: 15px 16px;
   border-radius: 16px;
-  border: 1px solid var(--border);
-
-  font-size: 14px;
-  background: #ffffff;
+  border: 1px solid rgba(31, 35, 48, 0.10);
+  background: rgba(255, 255, 255, 0.92);
   color: var(--text);
-
-  box-shadow: 0 4px 14px rgba(120, 120, 140, 0.05);
+  font-size: 14px;
+  box-shadow: 0 10px 24px rgba(31, 35, 48, 0.06);
   outline: none;
-  transition: all 0.15s ease;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 #searchInput::placeholder {
-  color: #9aa0ad;
+  color: rgba(107, 114, 128, 0.80);
 }
 
 #searchInput:focus {
-  border-color: var(--accent);
-  box-shadow: 0 8px 20px rgba(139, 124, 246, 0.18);
+  border-color: rgba(255, 62, 165, 0.45);
+  box-shadow: 0 16px 30px rgba(255, 62, 165, 0.16);
 }
 
-/* Tool Cards */
+/* ---------------------------------------------------------
+   Tool cards (professional layout + clear code format)
+--------------------------------------------------------- */
 .tool-card {
   background: var(--surface);
-  padding: 18px;
-  border-radius: var(--radius);
-
-  border: 1px solid var(--border);
+  border: 1px solid rgba(31, 35, 48, 0.10);
   box-shadow: var(--shadow-soft);
-
-  margin-bottom: 16px;
-  transition: all 0.15s ease;
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  margin-bottom: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
 }
 
 .tool-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(139, 124, 246, 0.15);
-  border-color: rgba(139, 124, 246, 0.25);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(255, 62, 165, 0.20);
 }
 
 .tool-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
+/* SUPER CLEAR CODE PILL */
 .code {
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-/* Soft badge */
-.tag {
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
   border-radius: 999px;
 
-  background: var(--accent-soft);
-  color: var(--accent);
+  background: rgba(31, 35, 48, 0.04);
+  border: 1px solid rgba(31, 35, 48, 0.10);
+
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.code::before {
+  content: "CODE";
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: rgba(31, 35, 48, 0.55);
+}
+
+/* Tag badge (pink soft) */
+.tag {
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--pink-soft);
+  color: var(--pink);
+  border: 1px solid rgba(255, 62, 165, 0.18);
+  white-space: nowrap;
 }
 
 .tool-card h3 {
-  font-size: 17px;
-  font-weight: 800;
-  margin: 4px 0 6px;
+  font-size: 18px;
+  font-weight: 950;
+  margin: 2px 0 6px;
 }
 
 .description {
   font-size: 14px;
   color: var(--muted);
-  margin-bottom: 12px;
+  margin: 0 0 12px;
 }
 
-/* Footer */
-.footer {
+/* No results */
+#no-results {
   text-align: center;
-  margin-top: 32px;
+  color: var(--muted);
+  padding: 18px 0;
+}
+
+/* ---------------------------------------------------------
+   Footer
+--------------------------------------------------------- */
+.footer {
+  margin-top: 28px;
+  text-align: center;
   font-size: 12px;
   color: var(--muted);
 }
 
 .footer a {
   display: inline-block;
-  margin-top: 8px;
-  font-weight: 700;
+  margin-top: 10px;
+  font-weight: 900;
   text-decoration: none;
-  color: var(--accent);
+  color: var(--pink);
 }
 
-/* Responsive */
+.footer a:hover {
+  opacity: 0.85;
+}
+
+/* Utilities */
+.hidden { display: none; }
+
+/* ---------------------------------------------------------
+   Responsive (Desktop polish)
+--------------------------------------------------------- */
 @media (min-width: 768px) {
   body {
-    max-width: 860px;
-    margin: auto;
-    padding: 32px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 40px;
   }
 
   .logo {
-    font-size: 36px;
+    font-size: 40px;
   }
+
+  .card, .tool-card {
+    padding: 20px;
+  }
+
+  .tool-card h3 {
+    font-size: 19px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .btn, .tool-card, #searchInput { transition: none; }
 }
