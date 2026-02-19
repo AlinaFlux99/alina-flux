@@ -1,8 +1,9 @@
 /* =========================================================
-   Alina Flux – Ultra Style Pink Premium v2.2 (Polished + Tier-1)
+   Alina Flux – Ultra Style Pink Premium v2.3 (Enhanced Featured Card)
    Drop-in replacement for styles.css
    (keeps your existing class names + your clickable-card patch)
-   + Premium centered Latest card
+   + Stronger Featured Latest card
+   + Better visual hierarchy
    + Arrow buttons (Open →)
    + Fix for "No tool found" (hidden utility)
    ========================================================= */
@@ -18,28 +19,22 @@
 
 /* Theme */
 :root {
-  /* Background + surfaces */
   --bg: #ffffff;
-  --bg-soft: #fff6fb;              /* very light pink */
+  --bg-soft: #fff6fb;
   --surface: #ffffff;
 
-  /* Text */
   --text: #151821;
   --muted: #6b7280;
 
-  /* Borders + shadows */
   --border: rgba(21, 24, 33, 0.08);
-  --border-strong: rgba(255, 62, 165, 0.20);
+  --border-strong: rgba(255, 62, 165, 0.28);
 
-  /* Accent (Pink) */
   --pink: #ff3ea5;
   --pink-2: #ff6bc2;
   --pink-soft: rgba(255, 62, 165, 0.12);
 
-  /* Radius */
   --radius: 20px;
 
-  /* Shadows */
   --shadow-soft: 0 8px 24px rgba(21, 24, 33, 0.06);
   --shadow-pink: 0 18px 45px rgba(255, 62, 165, 0.14);
   --shadow-btn: 0 12px 28px rgba(255, 62, 165, 0.22);
@@ -55,7 +50,6 @@ body {
   color: var(--text);
   line-height: 1.6;
 
-  /* softer, more premium background */
   background:
     radial-gradient(900px 420px at 50% -120px, rgba(255, 62, 165, 0.12), transparent 60%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg) 60%, var(--bg-soft) 100%);
@@ -81,7 +75,7 @@ body {
   margin-top: 6px;
 }
 
-/* Generic Card (Latest section uses .card) */
+/* Generic Card */
 .card,
 .tool-card {
   background: var(--surface);
@@ -93,26 +87,103 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-/* ===== Premium Latest Tool Card (centered + more premium) ===== */
-.latest-section .card {
-  max-width: 720px;
-  margin: 0 auto 22px;
-  text-align: center;
+/* =========================================================
+   Premium Featured Latest Tool Card (UPGRADED)
+   ========================================================= */
 
-  background: linear-gradient(145deg, #ffffff, #fff5fa);
-  border: 1px solid rgba(255, 62, 165, 0.18);
+.latest-section .card {
+  position: relative;
+  overflow: hidden;
+
+  max-width: 720px;
+  margin: 0 auto 26px;
+  text-align: center;
+  padding: 28px 24px;
+
+  border-radius: 26px;
+
+  background: linear-gradient(180deg, #ffffff 0%, #fff7fb 100%);
+  border: 1px solid rgba(255, 62, 165, 0.22);
 
   box-shadow:
-    0 28px 70px rgba(255, 62, 165, 0.12),
-    0 10px 24px rgba(21, 24, 33, 0.05);
+    0 32px 85px rgba(255, 62, 165, 0.16),
+    0 12px 30px rgba(21, 24, 33, 0.06);
 }
 
+/* glow aura */
+.latest-section .card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(700px 240px at 50% 0%, rgba(255, 62, 165, 0.25), transparent 65%);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.latest-section .card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Latest title */
+.latest-section .card h2 {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+/* Featured badge */
+.latest-section .card h2::after {
+  content: "FEATURED";
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--pink), var(--pink-2));
+  box-shadow: 0 10px 22px rgba(255, 62, 165, 0.25);
+}
+
+/* Latest tool text */
 #latest-tool {
-  color: var(--muted);
   font-size: 14px;
+  font-weight: 700;
+  color: rgba(21, 24, 33, 0.70);
+  margin-bottom: 14px;
 }
 
-/* Tool cards hover */
+/* Strong emphasis if JS wraps tool name in <strong> */
+#latest-tool strong {
+  font-weight: 900;
+  color: var(--text);
+}
+
+/* Button inside Latest */
+.latest-section .btn {
+  margin-top: 6px;
+  padding: 13px 26px;
+  border-radius: 16px;
+  font-weight: 900;
+  box-shadow: 0 16px 36px rgba(255, 62, 165, 0.28);
+}
+
+/* Hover elevate */
+.latest-section .card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 62, 165, 0.36);
+  box-shadow:
+    0 40px 100px rgba(255, 62, 165, 0.20),
+    0 16px 40px rgba(21, 24, 33, 0.08);
+}
+
+/* =========================================================
+   Tool Cards
+   ========================================================= */
+
 .tool-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-pink);
@@ -120,7 +191,6 @@ body {
   cursor: pointer;
 }
 
-/* Tool Header (old structure; kept for compatibility) */
 .tool-header {
   display: flex;
   justify-content: space-between;
@@ -129,7 +199,6 @@ body {
   margin-bottom: 8px;
 }
 
-/* Code badge */
 .code {
   font-weight: 700;
   font-size: 12px;
@@ -139,7 +208,6 @@ body {
   color: rgba(21, 24, 33, 0.75);
 }
 
-/* Tag badge */
 .tag {
   font-size: 12px;
   font-weight: 700;
@@ -151,7 +219,6 @@ body {
   white-space: nowrap;
 }
 
-/* Titles */
 .tool-card h3 {
   font-size: 20px;
   font-weight: 900;
@@ -165,7 +232,10 @@ body {
   margin-bottom: 16px;
 }
 
-/* Buttons (Latest button + any fallback buttons) */
+/* =========================================================
+   Buttons
+   ========================================================= */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -209,7 +279,10 @@ body {
   transform: translateY(-1px);
 }
 
-/* Search */
+/* =========================================================
+   Search
+   ========================================================= */
+
 .search-section {
   margin-bottom: 18px;
 }
@@ -218,7 +291,6 @@ body {
   width: 100%;
   padding: 16px 18px;
   border-radius: 18px;
-
   border: 1px solid rgba(21, 24, 33, 0.10);
   background: rgba(255, 255, 255, 0.98);
 
@@ -236,20 +308,28 @@ body {
   color: rgba(107, 114, 128, 0.75);
 }
 
-/* Glow effect (focus) */
 #searchInput:focus {
   border-color: rgba(255, 62, 165, 0.65);
-  box-shadow: 0 0 0 4px rgba(255, 62, 165, 0.14), 0 16px 34px rgba(255, 62, 165, 0.10);
+  box-shadow: 0 0 0 4px rgba(255, 62, 165, 0.14),
+              0 16px 34px rgba(255, 62, 165, 0.10);
 }
 
-/* No results text */
+#searchInput.glow-on {
+  border-color: rgba(255, 79, 163, 0.55) !important;
+  box-shadow: 0 0 0 4px rgba(255, 62, 165, 0.12),
+              0 16px 34px rgba(255, 79, 163, 0.12) !important;
+}
+
+/* =========================================================
+   Footer + Utility
+   ========================================================= */
+
 #no-results {
   text-align: center;
   color: var(--muted);
   padding: 14px 0 6px;
 }
 
-/* Footer */
 .footer {
   text-align: center;
   margin-top: 30px;
@@ -267,10 +347,14 @@ body {
   text-decoration: underline;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* Desktop */
 @media (min-width: 768px) {
   body {
-    max-width: 760px; /* narrower = more premium */
+    max-width: 760px;
     margin: 0 auto;
     padding: 28px 20px 50px;
   }
@@ -289,14 +373,8 @@ body {
   }
 }
 
-/* Utility: ensures "No tool found" stays hidden when JS adds .hidden */
-.hidden {
-  display: none !important;
-}
-
 /* =========================================================
-   ---- PATCH: clickable card + clean links + CTA alignment ----
-   (kept, but cleaned + made safer)
+   Clickable Card Patch (Preserved)
    ========================================================= */
 
 .tool-card.tool-card-link {
@@ -309,7 +387,6 @@ body {
   color: inherit !important;
 }
 
-/* Top row inside tool card (new structure used by your updated app.js) */
 .tool-top {
   display: flex;
   align-items: center;
@@ -325,12 +402,10 @@ body {
   flex-wrap: wrap;
 }
 
-/* optional title helper class */
 .tool-title {
   margin: 0 0 6px;
 }
 
-/* Right-side CTA button (Open →) */
 .cta {
   flex: 0 0 auto;
   display: inline-flex;
@@ -339,7 +414,6 @@ body {
   gap: 8px;
 
   text-decoration: none;
-
   padding: 10px 14px;
   border-radius: 14px;
 
@@ -367,10 +441,4 @@ body {
 
 .tool-card:hover .cta::after {
   transform: translateX(3px);
-}
-
-/* auto-glow when JS adds .glow-on (on load) */
-#searchInput.glow-on {
-  border-color: rgba(255, 79, 163, 0.55) !important;
-  box-shadow: 0 0 0 4px rgba(255, 62, 165, 0.12), 0 16px 34px rgba(255, 79, 163, 0.12) !important;
 }
