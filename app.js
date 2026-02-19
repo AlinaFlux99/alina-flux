@@ -36,10 +36,11 @@ function initApp(products) {
     const name = safeText(latestTool.name);
 
     latestContainer.innerHTML = `
-      <span class="latest-code">Post #${code}</span>
-      <span class="latest-sep">—</span>
-      <span class="latest-name">${escapeHtml(name)}</span>
-    `;
+  <span class="latest-code">Code ${code}</span>
+  <span class="latest-sep">—</span>
+  <span class="latest-name">${escapeHtml(name)}</span>
+`;
+
 
     latestButton.href = safeText(latestTool.link, "#");
     latestButton.setAttribute("rel", "noopener noreferrer");
@@ -120,12 +121,13 @@ function renderTools(tools) {
     card.href = link;
     card.target = "_blank";
     card.rel = "noopener noreferrer";
-    card.setAttribute("aria-label", `Open Post #${code}: ${name}`);
+    card.setAttribute("aria-label", `Open Code ${code}: ${name}`);
+
 
     card.innerHTML = `
       <div class="tool-top">
         <div class="tool-meta">
-          <span class="code">Post #${escapeHtml(code)}</span>
+          <span class="code">Code ${escapeHtml(code)}</span>
           ${tag ? `<span class="tag">${escapeHtml(tag)}</span>` : ""}
         </div>
         <span class="cta">Open</span>
