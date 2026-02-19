@@ -1,50 +1,150 @@
-/* ---- PATCH: clickable card + clean links + CTA alignment ---- */
+// app.js (FULL REPLACE)
 
-.tool-card.tool-card-link{
-  display:block;
-  text-decoration:none !important;
-  color: inherit !important;
+// ---------- Helpers ----------
+const byId = (id) => document.getElementById(id);
+
+function toNum(x) {
+  const n = parseInt(String(x).replace(/[^\d]/g, ""), 10);
+  return Number.isFinite(n) ? n : 0;
 }
 
-.tool-card.tool-card-link:visited{
-  color: inherit !important;
+function safeText(x, fallback = "") {
+  if (x === null || x === undefined) return fallback;
+  return String(x);
 }
 
-.tool-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-bottom:10px;
+// ---------- Load products ----------
+fetch(`products.json?ts=${Date.now()}`, { cache: "no-store" })
+  .then((res) => {
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    return res.json();
+  })
+  .then((data) => initApp(Array.isArray(data) ? data : []))
+  .catch((err) => console.error("Error loading products:", err));
+
+function initApp(products) {
+  // Sort newest first (higher code = newer)
+  products.sort((a, b) => toNum(b.code) - toNum(a.code));
+
+  // Latest tool
+  const latestTool = products[0];
+  const latestContainer = byId("latest-tool");
+  const latestButton = byId("latest-button");
+
+  if (latestTool && latestContainer && latestButton) {
+    const code = safeText(latestTool.code);
+    const name = safeText(latestTool.name);
+
+    latestContainer.innerHTML = `
+      <span class="latest-code">Post #${code}</span>
+      <span class="latest-sep">—</span>
+      <span class="latest-name">${escapeHtml(name)}</span>
+    `;
+
+    latestButton.href = safeText(latestTool.link, "#");
+    latestButton.setAttribute("rel", "noopener noreferrer");
+    latestButton.setAttribute("target", "_blank");
+    latestButton.setAttribute("aria-label", `Open latest: ${name}`);
+  }
+
+  // Render initial (top 20)
+  const initial = products.slice(0, 20);
+  renderTools(initial);
+
+  // Autofocus search + glow on load (Instagram-friendly)
+  const searchInput = byId("searchInput");
+  if (searchInput) {
+    // Put cursor in search automatically
+    setTimeout(() => {
+      searchInput.focus({ preventScroll: true });
+      searchInput.classList.add("glow-on");
+      setTimeout(() => searchInput.classList.remove("glow-on"), 900);
+    }, 250);
+
+    // Debounced search
+    let t = null;
+    searchInput.addEventListener("input", function () {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        const query = this.value.toLowerCase().trim();
+
+        if (!query) {
+          renderTools(products.slice(0, 20));
+          return;
+        }
+
+        const filtered = products.filter((p) => {
+          const code = safeText(p.code).toLowerCase();
+          const name = safeText(p.name).toLowerCase();
+          return code.includes(query) || name.includes(query);
+        });
+
+        renderTools(filtered);
+      }, 80);
+    });
+
+    // Enter opens the first result (fast mobile flow)
+    searchInput.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      const first = document.querySelector(".tool-card-link");
+      if (first && first.href) window.open(first.href, "_blank", "noopener");
+    });
+  }
 }
 
-.tool-meta{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
+// ---------- Render tool cards (ENTIRE CARD CLICKABLE) ----------
+function renderTools(tools) {
+  const container = byId("tools-container");
+  const noResults = byId("no-results");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  if (!tools || tools.length === 0) {
+    if (noResults) noResults.classList.remove("hidden");
+    return;
+  }
+  if (noResults) noResults.classList.add("hidden");
+
+  tools.forEach((tool) => {
+    const code = safeText(tool.code);
+    const name = safeText(tool.name);
+    const desc = safeText(tool.description);
+    const tag = safeText(tool.tag);
+    const link = safeText(tool.link, "#");
+
+    // Use <a> as the whole card (so card is clickable)
+    // IMPORTANT: No nested <a> inside to avoid layout breaking.
+    const card = document.createElement("a");
+    card.className = "tool-card tool-card-link";
+    card.href = link;
+    card.target = "_blank";
+    card.rel = "noopener noreferrer";
+    card.setAttribute("aria-label", `Open Post #${code}: ${name}`);
+
+    card.innerHTML = `
+      <div class="tool-top">
+        <div class="tool-meta">
+          <span class="code">Post #${escapeHtml(code)}</span>
+          ${tag ? `<span class="tag">${escapeHtml(tag)}</span>` : ""}
+        </div>
+        <span class="cta">Open</span>
+      </div>
+
+      <h3 class="tool-title">${escapeHtml(name)}</h3>
+      ${desc ? `<p class="description">${escapeHtml(desc)}</p>` : ""}
+    `;
+
+    container.appendChild(card);
+  });
 }
 
-.tool-title{
-  margin: 0 0 6px;
-}
-
-.cta{
-  flex: 0 0 auto;
-  padding: 10px 14px;
-  border-radius: 12px;
-  font-weight: 800;
-  font-size: 14px;
-  background: linear-gradient(135deg, #ff4fa3, #ff77c8);
-  color:#fff;
-  box-shadow: 0 10px 20px rgba(255, 79, 163, 0.22);
-}
-
-.tool-card:hover .cta{
-  transform: translateY(-1px);
-}
-
-#searchInput.glow-on{
-  border-color: rgba(255, 79, 163, 0.55) !important;
-  box-shadow: 0 12px 28px rgba(255, 79, 163, 0.18) !important;
+// ---------- Minimal HTML escape (prevents breaking UI) ----------
+function escapeHtml(str) {
+  return String(str)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
 }
