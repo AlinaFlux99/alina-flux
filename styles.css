@@ -1,123 +1,240 @@
-/* Reset */
+/* =========================================================
+   Alina Flux – Premium Minimal (Tier-1, Instagram-friendly)
+   Drop-in replacement for styles.css
+   ========================================================= */
+
+/* Reset + base */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Clean, premium system stack */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+:root {
+  /* Tier-1 minimal + soft feminine accent */
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --text: #14161a;
+  --muted: #5b6472;
+  --border: rgba(20, 22, 26, 0.10);
+  --shadow: 0 10px 30px rgba(20, 22, 26, 0.08);
+  --shadow-soft: 0 8px 20px rgba(20, 22, 26, 0.06);
+  --accent: #6c63ff;           /* soft lavender */
+  --accent-soft: rgba(108, 99, 255, 0.12);
+  --radius: 16px;
+}
+
+html, body {
+  height: 100%;
 }
 
 body {
-  background: #f7f9fc;
-  color: #222;
-  padding: 20px;
+  background: radial-gradient(1200px 600px at 50% -10%, rgba(108, 99, 255, 0.12), transparent 55%),
+              var(--bg);
+  color: var(--text);
+  padding: 22px 18px;
+  line-height: 1.45;
 }
 
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 10px 0 18px;
 }
 
 .logo {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
 }
 
 .subtitle {
-  color: #666;
-  margin-top: 6px;
+  color: var(--muted);
+  margin-top: 8px;
+  font-size: 14px;
 }
 
-/* Card */
+/* Generic Card */
 .card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.05);
-  margin-bottom: 20px;
+  background: var(--surface);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+/* Latest section spacing */
+.latest-section .card h2 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#latest-tool {
+  color: var(--muted);
+  font-size: 14px;
 }
 
 /* Buttons */
 .btn {
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 11px 16px;
+  border-radius: 12px;
   text-decoration: none;
-  margin-top: 12px;
+
   font-size: 14px;
+  font-weight: 700;
+
+  border: 1px solid transparent;
+  transition: transform 0.08s ease, opacity 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  user-select: none;
+}
+
+.btn:active {
+  transform: translateY(1px);
 }
 
 .primary {
-  background: #111;
+  background: var(--text);
   color: #fff;
+  box-shadow: 0 8px 18px rgba(20, 22, 26, 0.18);
 }
 
 .primary:hover {
-  opacity: 0.85;
+  opacity: 0.92;
 }
 
 /* Search */
 .search-section {
-  margin: 20px 0;
+  margin: 14px 0 14px;
 }
 
 #searchInput {
   width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  padding: 14px 14px;
+  border-radius: 14px;
+
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.95);
+
   font-size: 14px;
+  color: var(--text);
+
+  box-shadow: 0 6px 18px rgba(20, 22, 26, 0.05);
+  outline: none;
+  transition: border 0.15s ease, box-shadow 0.15s ease;
 }
 
-/* Tools */
+#searchInput::placeholder {
+  color: rgba(91, 100, 114, 0.75);
+}
+
+#searchInput:focus {
+  border-color: rgba(108, 99, 255, 0.45);
+  box-shadow: 0 10px 26px rgba(108, 99, 255, 0.14);
+}
+
+/* Tools list */
+.tools-section {
+  margin-top: 8px;
+}
+
 .tool-card {
-  background: #fff;
+  background: var(--surface);
   padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
-  margin-bottom: 15px;
+  border-radius: var(--radius);
+
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+
+  margin-bottom: 14px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
 }
 
+.tool-card:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+  border-color: rgba(108, 99, 255, 0.18);
+}
+
+/* Top row */
 .tool-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6px;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
 .code {
-  font-weight: bold;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.01em;
 }
 
+/* Badge */
 .tag {
   font-size: 12px;
-  background: #eef2ff;
-  color: #4f46e5;
-  padding: 4px 8px;
-  border-radius: 20px;
+  font-weight: 700;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(108, 99, 255, 0.18);
+  white-space: nowrap;
+}
+
+/* Tool title and description */
+.tool-card h3 {
+  font-size: 16px;
+  font-weight: 800;
+  margin: 2px 0 6px;
 }
 
 .description {
   font-size: 14px;
-  color: #555;
-  margin: 6px 0;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+/* "No results" text */
+#no-results {
+  text-align: center;
+  color: var(--muted);
+  padding: 18px 0;
 }
 
 /* Footer */
 .footer {
-  margin-top: 40px;
+  margin-top: 28px;
   text-align: center;
   font-size: 12px;
-  color: #666;
+  color: var(--muted);
+  padding-bottom: 10px;
 }
 
 .footer a {
-  display: block;
-  margin-top: 8px;
+  display: inline-block;
+  margin-top: 10px;
   text-decoration: none;
-  color: #111;
+  color: var(--text);
+  font-weight: 700;
 }
 
+.footer a:hover {
+  color: var(--accent);
+}
+
+/* Utilities */
 .hidden {
   display: none;
 }
@@ -125,7 +242,29 @@ body {
 /* Responsive */
 @media (min-width: 768px) {
   body {
-    max-width: 800px;
-    margin: auto;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 20px;
+  }
+
+  .logo {
+    font-size: 34px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .tool-card {
+    padding: 18px;
+  }
+}
+
+/* Reduced motion (accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .tool-card,
+  #searchInput {
+    transition: none;
   }
 }
