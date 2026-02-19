@@ -1,96 +1,50 @@
-// Auto focus search on load
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("searchInput");
-  if (searchInput) {
-    searchInput.focus();
-  }
-});
+/* ---- PATCH: clickable card + clean links + CTA alignment ---- */
 
-// Fetch products
-fetch("products.json")
-  .then(res => res.json())
-  .then(data => initApp(data))
-  .catch(err => console.error("Error loading products:", err));
-
-function initApp(products) {
-
-  // Sort newest first
-  products.sort((a, b) => Number(b.code) - Number(a.code));
-
-  const latestTool = products[0];
-  const latestContainer = document.getElementById("latest-tool");
-  const latestButton = document.getElementById("latest-button");
-
-  // Latest tool
-  latestContainer.innerHTML = `
-    <span class="code-badge">CODE</span>
-    <strong>#${latestTool.code}</strong> — ${latestTool.name}
-  `;
-  latestButton.href = latestTool.link;
-
-  // Show first 20
-  renderTools(products.slice(0, 20));
-
-  // Search
-  const searchInput = document.getElementById("searchInput");
-
-  searchInput.addEventListener("input", function () {
-    const query = this.value.toLowerCase().trim();
-
-    if (!query) {
-      renderTools(products.slice(0, 20));
-      return;
-    }
-
-    const filtered = products.filter(p =>
-      p.code.includes(query) ||
-      p.name.toLowerCase().includes(query)
-    );
-
-    renderTools(filtered);
-  });
+.tool-card.tool-card-link{
+  display:block;
+  text-decoration:none !important;
+  color: inherit !important;
 }
 
-// Render tools
-function renderTools(tools) {
+.tool-card.tool-card-link:visited{
+  color: inherit !important;
+}
 
-  const container = document.getElementById("tools-container");
-  const noResults = document.getElementById("no-results");
+.tool-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+}
 
-  container.innerHTML = "";
+.tool-meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
-  if (!tools.length) {
-    noResults.classList.remove("hidden");
-    return;
-  }
+.tool-title{
+  margin: 0 0 6px;
+}
 
-  noResults.classList.add("hidden");
+.cta{
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  background: linear-gradient(135deg, #ff4fa3, #ff77c8);
+  color:#fff;
+  box-shadow: 0 10px 20px rgba(255, 79, 163, 0.22);
+}
 
-  tools.forEach(tool => {
+.tool-card:hover .cta{
+  transform: translateY(-1px);
+}
 
-    const card = document.createElement("a");
-    card.className = "tool-card";
-    card.href = tool.link;
-    card.target = "_blank";
-    card.rel = "noopener";
-
-    card.innerHTML = `
-      <div class="tool-top">
-        <div class="code-group">
-          <span class="code-label">CODE</span>
-          <span class="code-number">#${tool.code}</span>
-        </div>
-        <span class="tag">${tool.tag}</span>
-      </div>
-
-      <h3>${tool.name}</h3>
-      <p class="description">${tool.description}</p>
-
-      <div class="card-footer">
-        <span class="open-text">Open →</span>
-      </div>
-    `;
-
-    container.appendChild(card);
-  });
+#searchInput.glow-on{
+  border-color: rgba(255, 79, 163, 0.55) !important;
+  box-shadow: 0 12px 28px rgba(255, 79, 163, 0.18) !important;
 }
