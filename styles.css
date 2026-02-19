@@ -182,6 +182,10 @@ body {
   color: rgba(21, 24, 33, 0.55);
 }
 
+.latest-sep {
+  color: rgba(21, 24, 33, 0.35);
+}
+
 
 /* Strong emphasis if JS wraps tool name in <strong> */
 #latest-tool strong {
