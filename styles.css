@@ -1,7 +1,10 @@
 /* =========================================================
-   Alina Flux – Ultra Style Pink Premium v2.1 (Clean + Tier-1)
+   Alina Flux – Ultra Style Pink Premium v2.2 (Polished + Tier-1)
    Drop-in replacement for styles.css
    (keeps your existing class names + your clickable-card patch)
+   + Premium centered Latest card
+   + Arrow buttons (Open →)
+   + Fix for "No tool found" (hidden utility)
    ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap');
@@ -90,6 +93,25 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
+/* ===== Premium Latest Tool Card (centered + more premium) ===== */
+.latest-section .card {
+  max-width: 720px;
+  margin: 0 auto 22px;
+  text-align: center;
+
+  background: linear-gradient(145deg, #ffffff, #fff5fa);
+  border: 1px solid rgba(255, 62, 165, 0.18);
+
+  box-shadow:
+    0 28px 70px rgba(255, 62, 165, 0.12),
+    0 10px 24px rgba(21, 24, 33, 0.05);
+}
+
+#latest-tool {
+  color: var(--muted);
+  font-size: 14px;
+}
+
 /* Tool cards hover */
 .tool-card:hover {
   transform: translateY(-3px);
@@ -143,11 +165,13 @@ body {
   margin-bottom: 16px;
 }
 
-/* Buttons (kept for Latest button + any fallback buttons) */
+/* Buttons (Latest button + any fallback buttons) */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+
   text-decoration: none;
   cursor: pointer;
 
@@ -165,10 +189,20 @@ body {
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
+.btn::after {
+  content: "→";
+  font-size: 16px;
+  transition: transform 0.15s ease;
+}
+
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 40px rgba(255, 62, 165, 0.30);
   filter: saturate(1.05);
+}
+
+.btn:hover::after {
+  transform: translateX(3px);
 }
 
 .btn:active {
@@ -255,6 +289,11 @@ body {
   }
 }
 
+/* Utility: ensures "No tool found" stays hidden when JS adds .hidden */
+.hidden {
+  display: none !important;
+}
+
 /* =========================================================
    ---- PATCH: clickable card + clean links + CTA alignment ----
    (kept, but cleaned + made safer)
@@ -291,12 +330,14 @@ body {
   margin: 0 0 6px;
 }
 
-/* Right-side CTA button */
+/* Right-side CTA button (Open →) */
 .cta {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+
   text-decoration: none;
 
   padding: 10px 14px;
@@ -312,10 +353,20 @@ body {
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
+.cta::after {
+  content: "→";
+  font-size: 16px;
+  transition: transform 0.15s ease;
+}
+
 .tool-card:hover .cta {
   transform: translateY(-1px);
   box-shadow: 0 14px 26px rgba(255, 79, 163, 0.26);
   filter: saturate(1.05);
+}
+
+.tool-card:hover .cta::after {
+  transform: translateX(3px);
 }
 
 /* auto-glow when JS adds .glow-on (on load) */
