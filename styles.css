@@ -16,13 +16,13 @@
 
 :root {
   /* Tier-1 minimal + soft feminine accent */
-  --bg: #f6f7fb;
+  --bg: #fafbff;
   --surface: #ffffff;
-  --text: #14161a;
+  --text: #1f2328;
   --muted: #5b6472;
   --border: rgba(20, 22, 26, 0.10);
   --shadow: 0 10px 30px rgba(20, 22, 26, 0.08);
-  --shadow-soft: 0 8px 20px rgba(20, 22, 26, 0.06);
+  --shadow-soft: 0 6px 16px rgba(20, 22, 26, 0.05);
   --accent: #6c63ff;           /* soft lavender */
   --accent-soft: rgba(108, 99, 255, 0.12);
   --radius: 16px;
@@ -33,12 +33,12 @@ html, body {
 }
 
 body {
-  background: radial-gradient(1200px 600px at 50% -10%, rgba(108, 99, 255, 0.12), transparent 55%),
-              var(--bg);
+  background: var(--bg);
   color: var(--text);
   padding: 22px 18px;
-  line-height: 1.45;
+  line-height: 1.5;
 }
+
 
 /* Header */
 .header {
