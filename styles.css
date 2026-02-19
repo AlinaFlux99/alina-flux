@@ -476,3 +476,7 @@ body {
 .tool-card:hover .cta::after {
   transform: translateX(3px);
 }
+
+.footer {
+  padding-bottom: 40px;
+}
