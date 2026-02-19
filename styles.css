@@ -140,6 +140,10 @@ body {
 }
 
 /* Featured badge (clean + modern, not flashy) */
+.latest-section .card h2::before {
+  content: "🔥 ";
+}
+
 .latest-section .card h2::after {
   content: "FEATURED";
   margin-left: 10px;
