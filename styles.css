@@ -837,3 +837,49 @@ body {
     font-size: 13px;
   }
 }
+
+
+/* ===============================
+   Legal Pages
+================================ */
+
+.legal-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+.legal-title {
+  text-align: center;
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 26px;
+  color: var(--text);
+}
+
+.legal-card {
+  background: #ffffff;
+  border: 1px solid rgba(21, 24, 33, 0.08);
+  border-radius: 24px;
+  padding: 28px 28px;
+  box-shadow: 0 18px 40px rgba(21, 24, 33, 0.06);
+}
+
+.legal-card p {
+  margin-bottom: 16px;
+  color: rgba(21, 24, 33, 0.82);
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.back-home {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--pink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.back-home:hover {
+  text-decoration: underline;
+}
