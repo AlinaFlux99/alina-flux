@@ -164,7 +164,7 @@ body {
 
 /* Latest tool text (cleaner) */
 #latest-tool {
-  font-size: 15px;          /* slightly bigger */
+  font-size: 15px;
   font-weight: 500;
   color: rgba(21, 24, 33, 0.65);
   margin-bottom: 14px;
@@ -185,7 +185,6 @@ body {
 .latest-sep {
   color: rgba(21, 24, 33, 0.35);
 }
-
 
 /* Strong emphasis if JS wraps tool name in <strong> */
 #latest-tool strong {
@@ -481,7 +480,6 @@ body {
   padding-bottom: 40px;
 }
 
-
 /* ===============================
    Privacy Page Improvements
 ================================ */
@@ -526,8 +524,6 @@ body {
   text-decoration: underline;
 }
 
-
-
 /* Subtitle with side lines */
 .subtitle {
   display: flex;
@@ -555,4 +551,199 @@ body {
     transparent
   );
   border-radius: 4px;
+}
+
+/* ===============================
+   Toolkit Popup Styles
+================================ */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(21, 24, 33, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.popup-modal {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background: #ffffff;
+  border: 1px solid rgba(255, 62, 165, 0.18);
+  border-radius: 24px;
+  box-shadow:
+    0 28px 80px rgba(21, 24, 33, 0.18),
+    0 10px 30px rgba(255, 62, 165, 0.12);
+  overflow: hidden;
+}
+
+.popup-content {
+  padding: 30px 24px 24px;
+  text-align: center;
+}
+
+.popup-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 999px;
+  background: #fff6fb;
+  color: #111827;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(21, 24, 33, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.popup-close:hover {
+  transform: translateY(-1px);
+  background: #ffeaf5;
+  box-shadow: 0 12px 22px rgba(21, 24, 33, 0.10);
+}
+
+.popup-content h2 {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.popup-text {
+  font-size: 15px;
+  line-height: 1.8;
+  color: rgba(21, 24, 33, 0.74);
+  margin-bottom: 20px;
+}
+
+.popup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#popup-email {
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: 16px;
+  border: 1px solid rgba(21, 24, 33, 0.12);
+  background: rgba(255, 255, 255, 0.98);
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  outline: none;
+  box-shadow: 0 8px 18px rgba(21, 24, 33, 0.04);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#popup-email::placeholder {
+  color: rgba(107, 114, 128, 0.75);
+}
+
+#popup-email:focus {
+  border-color: rgba(255, 62, 165, 0.65);
+  box-shadow:
+    0 0 0 4px rgba(255, 62, 165, 0.12),
+    0 14px 28px rgba(255, 62, 165, 0.08);
+}
+
+.popup-note {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: -2px;
+  margin-bottom: 2px;
+}
+
+.popup-submit {
+  width: 100%;
+  margin-top: 4px;
+}
+
+.popup-continue {
+  width: 100%;
+  margin-top: 14px;
+  padding: 13px 18px;
+  border: 1px solid rgba(21, 24, 33, 0.10);
+  border-radius: 14px;
+  background: #ffffff;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.popup-continue:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255, 62, 165, 0.30);
+  box-shadow: 0 12px 24px rgba(21, 24, 33, 0.06);
+}
+
+.popup-disclaimer {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: rgba(107, 114, 128, 0.95);
+}
+
+.popup-privacy {
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.popup-privacy a {
+  color: var(--pink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.popup-privacy a:hover {
+  text-decoration: underline;
+}
+
+.popup-message {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  background: #fff6fb;
+  color: #b4236f;
+  border: 1px solid rgba(255, 62, 165, 0.14);
+}
+
+@media (max-width: 640px) {
+  .popup-modal {
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  .popup-content {
+    padding: 26px 18px 20px;
+  }
+
+  .popup-content h2 {
+    font-size: 24px;
+    padding-right: 28px;
+  }
+
+  .popup-text {
+    font-size: 14px;
+  }
+
+  #popup-email,
+  .popup-submit,
+  .popup-continue {
+    font-size: 14px;
+  }
 }
