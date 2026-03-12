@@ -39,15 +39,62 @@
     <p id="no-results" class="hidden">No tool found</p>
   </section>
 
+  <!-- TOOLKIT POPUP -->
+  <div id="toolkit-popup" class="popup-overlay hidden" aria-hidden="true">
+    <div class="popup-modal" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <button id="popup-close" class="popup-close" aria-label="Close popup">&times;</button>
+
+      <div class="popup-content">
+        <h2 id="popup-title">🔥 Free AI Creator Toolkit</h2>
+        <p class="popup-text">
+          100+ AI tools<br>
+          10 monetization workflows<br>
+          Delivered instantly to your email
+        </p>
+
+        <form id="toolkit-form" class="popup-form">
+          <input
+            type="email"
+            id="popup-email"
+            name="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+          />
+
+          <p class="popup-note">Free AI Toolkit will be sent to your email.</p>
+
+          <button type="submit" id="popup-submit" class="btn primary popup-submit">
+            Unlock Free Toolkit
+          </button>
+        </form>
+
+        <button type="button" id="popup-continue" class="popup-continue">
+          Continue to Tool →
+        </button>
+
+        <p class="popup-disclaimer">
+          By entering your email, you agree to receive the toolkit and related emails. You can unsubscribe anytime.
+        </p>
+
+        <p class="popup-privacy">
+          <a href="privacy.html" target="_blank" rel="noopener noreferrer">View Privacy Policy</a>
+        </p>
+
+        <p id="popup-message" class="popup-message hidden"></p>
+      </div>
+    </div>
+  </div>
+
   <!-- FOOTER -->
   <footer class="footer">
     <p class="disclaimer">
-  Some links on this website are affiliate links. If you purchase through them, we may earn a commission at no extra cost to you.
-</p>
+      Some links on this website are affiliate links. If you purchase through them, we may earn a commission at no extra cost to you.
+    </p>
 
-<p class="disclaimer">
-  We do not own or control third-party websites linked here. Product details, pricing, and availability may change.
-</p>
+    <p class="disclaimer">
+      We do not own or control third-party websites linked here. Product details, pricing, and availability may change.
+    </p>
 
     <a href="privacy.html">Privacy Policy</a>
   </footer>
